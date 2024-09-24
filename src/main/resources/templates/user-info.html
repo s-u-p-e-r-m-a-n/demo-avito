@@ -1,0 +1,27 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+  <meta charset="UTF-8">
+  <title>AVITO_DEMO</title>
+</head>
+<body>
+<h1>AVITO_DEMO</h1>
+
+<h4>Подробная информация о пользователе</h4><hr>
+<b>Имя: </b>
+<span th:text="${user.name}"></span><br>
+<b>Номер телефона: </b>
+<span th:text="${user.phoneNumber}"></span><br>
+<b>Email: </b>
+<span th:text="${user.email}"></span><br><hr>
+<div>
+  <span th:if="${product.size()==0}" ><b>Товаров нет</b></span>
+  <p th:each="pre : ${product}" ></b>
+    <b th:text="${pre.title}" ></b>
+    <b th:text="${pre.price}"></b> руб.
+    <a th:href="@{'/product/'+${pre.id}}">Подробнее..</a></p>
+
+</div>
+</body>
+</html>

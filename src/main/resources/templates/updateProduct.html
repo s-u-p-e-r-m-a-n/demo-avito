@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Изменение объявления</title>
+</head>
+<body>
+<h1>Главное фото</h1>
+<div th:each="img:${images}">
+
+        <img height="60px" th:src="@{'/images/'+${img.id}}"/><br>
+    <a th:href="@{'/images/delete/'+${img.id}} " >Удалить</a>
+
+
+</div>
+
+<form th:actioin="@{'/product/update'+${product.id}}" method="post" enctype="multipart/form-data">
+    Наименование товара:<input type="text" name="title" th:value="${product.title}"><br><br>
+    Описание объявления:<input type="text" name="description" th:value="${product.description}"><br><br>
+    Цена:<input type="number" name="price" th:value="${product.price}"/><br><br>
+    Город:<input type="text" name="city" th:value="${product.city}"/><br><br>
+    Первая фотография:<input type="file" name="file1"/><br><br>
+    Вторая фотография:<input type="file" name="file2"/><br><br>
+    Третья фотография:<input type="file" name="file3"/><br><br>
+    <input type="submit" value="Применить редактирование "/>
+</form>
+
+
+</body>
+</html>

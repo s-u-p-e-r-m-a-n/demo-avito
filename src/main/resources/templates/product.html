@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <title>AVITO_DEMO</title>
+</head>
+<body>
+<h1>AVITO_DEMO</h1>
+<div th:insert="~{template :: copy}"></div>
+<span th:text="${user.roles}"></span>
+<div th:text="${user.roles == T(com.example.demoavito.Enum.Role).ROLE_ADMIN}">
+
+</div>
+<div th:if="${user.name!=null}">
+    <a href="/admin">Перейти в панель администратора</a>
+    <h3>Имя пользователя: <i th:text="${user.name}"></i></h3>
+    <form action="/logout" method="post">
+        <input type="hidden" name="_csrf" value="${_csrf.token}">
+        <input type="submit" value="Выйти"/>
+    </form>
+</div>
+
+
+</div>
+
+<div th:if="${user.name==null}">
+    <a href="/login">Войти</a></h1>
+</div>
+
+<div>
+    <form action="/" method="get">
+        Поиск по названию объявления: <input type="text" name="title"><br>
+        <input type="submit" value="Поиск"/>
+    </form>
+</div>
+<hr>
+
+<div>
+    <span th:if="${product.size()==0}" ><b>Товаров нет</b></span>
+
+    <p th:each="pre : ${product}" ></b>
+
+          <b th:text="${pre.title}" ></b>
+        <b th:text="${pre.price}"></b> руб.
+        <a th:href="@{'/product/'+${pre.id}}">Подробнее..</a></p>
+</div>
+<span th:if="${product==null} "></span>
+<hr>
+<th:block th:if="${user.name!=null}">
+<form action="/product/create" method="post" enctype="multipart/form-data">
+    <h3>Создать новый товар</h3>
+    Наименование товара:<input type="text" name="title"><br><br>
+    Описание объявления:<input type="text" name="description"><br><br>
+    Цена:<input type="number" name="price"/><br><br>
+    Город:<input type="text" name="city"/><br><br>
+    Первая фотография:<input type="file" name="file1"/><br><br>
+    Вторая фотография:<input type="file" name="file2"/><br><br>
+    Третья фотография:<input type="file" name="file3"/><br><br>
+    <input type="hidden" name="_csrf" value="${_csrf.token}">
+    <input type="submit" value="Добавить товар "/>
+</form>
+</th:block>
+
+
+
+</body>
+</html>

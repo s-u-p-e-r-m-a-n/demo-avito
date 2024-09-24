@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>AVITO_DEMO</title>
+</head>
+<body>
+<h1>AVITO_DEMO</h1>
+<h4>Админка</h4>
+
+<table border="1">
+    <tr>
+    <th>Email</th>
+    <th>Номер телефона</th>
+    <th>Активность</th>
+    <th>Роли</th>
+    <th>Бан</th>
+    <th>Редактирование</th>
+    <th>Подробная информация</th>
+    </tr>
+    <span th:each="user : ${users}">
+    <tr>
+        <th th:text="${user.email}"/>
+        <th th:text="${user.phoneNumber}"/>
+        <th> <span th:if="${user.active}"><h4>True</h4></span>
+            <span th:unless="${user.active}"><h4>False</h4></span>
+        </th>
+                <th th:text="${user.roles} ">
+
+                </th>
+<th>
+    <form th:action="@{'/admin/user/ban/'+${user.id}}" method="post">
+    <input type="submit" value="Бан">
+</form>
+</th>
+        <th>
+            <h4> <a th:href="@{'/admin/user/edit/'+${user.id}}">Редактирование</a></h4>
+        </th>
+        <th><h4><a th:href="@{'/user/'+${user.id}}">Подробная информация</a></h4> </th>
+    </tr>
+</span>
+</table>
+</body>
+</html>

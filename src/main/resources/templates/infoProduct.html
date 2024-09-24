@@ -1,0 +1,43 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>AVITO_DEMO</title>
+</head>
+<body>
+<h1>AVITO_DEMO</h1>
+
+<h4>Подробная информация о товаре</h4>
+<a href="/">К обьявлениям</a><br>
+<div th:each="img:${images}">
+          <img height="60px" th:src="@{'/images/'+${img.id}}"/><br><br>
+
+</div>
+
+<b>Название товара: </b>
+<span th:text="${product.title}"></span><br>
+<b>Описание товара: </b>
+<span th:text="${product.description}"></span><br>
+<b>Цена: </b>
+<span th:text="${product.price}"></span> руб.<br>
+<b>Город: </b>
+<span th:text="${product.city}"></span><br>
+<b>Автор: </b>
+<a th:href="@{'/user/'+${product.user.id}}"><b th:text="${product.user.name}"></b></a><br>
+<i>Data: </i>
+<span th:text="${product.DateOfCreate}"></span><br>
+<div th:if="${user.name!=null}">
+
+<form th:action="@{'/product/delete/'+${product.id}}" method="post">
+    <input type="submit" value="Удалить товар"/>
+</form>
+<form th:action="@{'/product/update/'+${product.id}}" method="get">
+    <input type="submit" value="Изменить"/>
+</form>
+</div>
+
+
+
+</body>
+</html>
